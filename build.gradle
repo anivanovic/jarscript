@@ -1,24 +1,31 @@
 plugins {
-    id 'java'
     id 'java-gradle-plugin'
     id 'maven-publish'
-    id 'com.gradle.plugin-publish' version '0.12.0'
-}
-
-group 'com.github.anivanovic.jarscript'
-version '1.0-SNAPSHOT'
-
-gradlePlugin {
-    plugins {
-        simplePlugin {
-            id = 'jar-script'
-            implementationClass = 'com.github.anivanovic.jarscript.JarScriptPlugin'
-        }
-    }
+    id 'com.gradle.plugin-publish' version '0.14.0'
 }
 
 repositories {
     mavenCentral()
+}
+
+group 'com.github.anivanovic'
+version '0.1.0'
+
+pluginBundle {
+    website = 'https://github.com/anivanovic/jarscript'
+    vcsUrl = 'https://github.com/anivanovic/jarscript.git'
+    tags = ['package', 'distribute']
+}
+
+gradlePlugin {
+    plugins {
+        jarScript {
+            id = 'com.github.anivanovic.jarscript'
+            implementationClass = 'com.github.anivanovic.jarscript.JarScriptPlugin'
+            displayName = 'JarScript'
+            description = 'Build single file for running your JVM app'
+        }
+    }
 }
 
 dependencies {
@@ -26,6 +33,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
